@@ -1,14 +1,14 @@
-# Java-VisitorPackageManagement 🏢
+# Java-VisitorPackageManagement 
 
 > A robust, full-stack condominium management system designed to streamline visitor access, parcel tracking, and resident management.
 
-## 📖 About the Project
+## About the Project
 
 Java-VisitorPackageManagement is a web application built to modernize the daily operations of residential buildings. It provides a secure and efficient way to manage the flow of people and goods, ensuring a collaborative and safe environment for residents and staff. 
 
 This project was developed focusing on enterprise-level architectural patterns, utilizing a robust Java backend, real-time event streaming, and a component-based UI.
 
-## 🚀 Technologies & Stack
+## Technologies 
 
 *   **Backend:** Java 17, Spring Boot 3
 *   **Data Persistence:** Spring Data JPA, Oracle DB
@@ -17,7 +17,7 @@ This project was developed focusing on enterprise-level architectural patterns, 
 *   **Frontend:** JSF (Jakarta Server Faces), PrimeFaces, JoinFaces
 *   **Infrastructure:** Docker & Docker Compose
 
-## ✨ Key Features
+## Key Features
 
 *   **Role-Based Dashboards:** Distinct interfaces and permissions for Admins (Managers) and Porters.
 *   **Resident Management:** Complete CRUD for apartments, residents, and contact information.
@@ -25,7 +25,7 @@ This project was developed focusing on enterprise-level architectural patterns, 
 *   **Parcel Notifications:** Event-driven architecture using **Kafka** to asynchronously process and notify residents when packages arrive at the front desk.
 *   **Modern UI:** Responsive and interactive components powered by PrimeFaces.
 
-## 🛠️ Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -33,7 +33,7 @@ This project was developed focusing on enterprise-level architectural patterns, 
 *   Maven
 *   Docker & Docker Compose (for running Oracle DB and Kafka locally)
 
-### Installation & Setup
+### Installation & Setup (in Linux)
 
 1.  **Clone the repository:**
     ```bash
@@ -59,3 +59,10 @@ This project was developed focusing on enterprise-level architectural patterns, 
 5.  **Access the application:**
     Open your browser and navigate to `http://localhost:8080`
 
+##  Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/MayconVyctor/Java-VisitorPackageManagement/issues).
+
+## License
+
+This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
