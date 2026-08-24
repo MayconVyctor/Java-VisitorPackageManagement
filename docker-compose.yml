@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # configurando o banco de dados oracle
+  oracle-db:
+    image: oracleinanutshell/oracle-xe-11g    # versao express edition da oracle, oficial e mais otimizada, consumindo menos
+    container_name: oracle-db
+    environment:                              # uma boa pratica injetar credencias via variaveis de ambiente, evitando expor no codigo
+        - ORACLE_PASSWORD=suasenhaforte123
+        - APP_USER=condo_admin
+        - APP_PASSWORD=condo_senha
+    ports:
+      - "1521:1521"
+    volumes:                                  # volumes garante a persistencia dos dados, se o container for desligado os moradores cadastrados nao sera perdidos pois estao salvos no disco da maquina
+      - oracle-data:/u01/app/oracle/oradata
+
+    # configurando zookeper (gerente do kafka)
+  zookeeper:
+    image: confluentic/cp-zookeeper:latest    # kafka tradicionalmente precisa do zookeeper para gerenciar o estado dos seus "brokers" (servidores dew mensagens)
+    container_name: zookeeper-condo
+    environment:
+        ZOOKEEPER_CLIENT_PORT: 2181
+        ZOOKEEPER_TICK_TIME: 2000
+
+    #configurando o kafka
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka-condo
+    depends_on:                               # é uma regra de arquitetura que diz ao docker, " o kafka so pode iniciar depois que o  zookeeper estiver pronto
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+volumes:
+    oracle-data:
+  
