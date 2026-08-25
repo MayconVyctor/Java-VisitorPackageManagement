@@ -6,34 +6,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
-
-/**
- * @Configuration: Diz ao Spring que esta é uma classe de configuração
- * e deve ser carregada na inicialização do sistema.
- */
 @Configuration
 public class TestDatabaseSeeder implements CommandLineRunner {
 
-    // Injeção de dependência do nosso repositório
     private final MoradorRepository moradorRepository;
-
-    /**
-     * INJEÇÃO VIA CONSTRUTOR (Clean Code / Melhor Prática):
-     * Em vez de usar @Autowired direto na variável, injetamos via construtor.
-     * Isso garante que a classe nunca seja instanciada sem o repositório,
-     * facilitando testes unitários no futuro.
-     */
     public TestDatabaseSeeder(MoradorRepository moradorRepository) {
         this.moradorRepository = moradorRepository;
     }
 
-    /**
-     * Este método run() será executado automaticamente pelo Spring Boot.
-     */
     @Override
     public void run(String... args) throws Exception {
 
-        // Regra de segurança: Só insere dados falsos se a tabela estiver vazia
         if (moradorRepository.count() == 0) {
             System.out.println("🌱 Semeando banco de dados Oracle com moradores de teste...");
 
@@ -49,8 +32,6 @@ public class TestDatabaseSeeder implements CommandLineRunner {
             m2.setApartamento("205B");
             m2.setTelefone("11977776666");
 
-            // O método saveAll() é muito mais performático do que chamar save() várias vezes,
-            // pois o Hibernate agrupa tudo em um único comando SQL (Batch Insert).
             moradorRepository.saveAll(Arrays.asList(m1, m2));
 
             System.out.println("✅ Moradores inseridos com sucesso!");
