@@ -1,68 +1,72 @@
-# Java-VisitorPackageManagement 
+# Java-VisitorPackageManagement
 
-> A robust, full-stack condominium management system designed to streamline visitor access, parcel tracking, and resident management.
+> Um sistema robusto e full-stack de gerenciamento de condomínios, desenvolvido para otimizar o controle de acesso de visitantes, o acompanhamento de encomendas e o gerenciamento de moradores.
 
-## About the Project
+## Sobre o Projeto
 
-Java-VisitorPackageManagement is a web application built to modernize the daily operations of residential buildings. It provides a secure and efficient way to manage the flow of people and goods, ensuring a collaborative and safe environment for residents and staff. 
+Java-VisitorPackageManagement é uma aplicação web desenvolvida para modernizar as operações diárias de edifícios residenciais. Ela oferece uma maneira segura e eficiente de gerenciar o fluxo de pessoas e mercadorias, garantindo um ambiente colaborativo e seguro para moradores e funcionários.
 
-This project was developed focusing on enterprise-level architectural patterns, utilizing a robust Java backend, real-time event streaming, and a component-based UI.
+Este projeto foi desenvolvido com foco em padrões de arquitetura de nível empresarial, utilizando um backend Java robusto, transmissão de eventos em tempo real e uma interface de usuário baseada em componentes.
 
-## Technologies 
+## Tecnologias
 
-*   **Backend:** Java 17, Spring Boot 3
-*   **Data Persistence:** Spring Data JPA, Oracle DB
-*   **Security:** Spring Security (Role-Based Access Control)
-*   **Messaging / Event Streaming:** Apache Kafka
-*   **Frontend:** JSF (Jakarta Server Faces), PrimeFaces, JoinFaces
-*   **Infrastructure:** Docker & Docker Compose
+* **Backend:** Java 17, Spring Boot 3
+* **Persistência de Dados:** Spring Data JPA, Oracle DB
+* **Segurança:** Spring Security (Controle de Acesso Baseado em Funções)
+* **Mensageria / Transmissão de Eventos:** Apache Kafka
+* **Frontend:** JSF (Jakarta Server Faces), PrimeFaces, JoinFaces
+* **Infraestrutura:** Docker e Docker Compose
 
-## Key Features
+## Principais Funcionalidades
 
-*   **Role-Based Dashboards:** Distinct interfaces and permissions for Admins (Managers) and Porters.
-*   **Resident Management:** Complete CRUD for apartments, residents, and contact information.
-*   **Visitor Access Control:** Real-time logging of visitor entries and exits.
-*   **Parcel Notifications:** Event-driven architecture using **Kafka** to asynchronously process and notify residents when packages arrive at the front desk.
-*   **Modern UI:** Responsive and interactive components powered by PrimeFaces.
+* **Dashboards Baseados em Funções:** Interfaces e permissões distintas para Administradores (Gerentes) e Porteiros.
+* **Gerenciamento de Moradores:** CRUD completo para apartamentos, moradores e informações de contato.
+* **Controle de Acesso de Visitantes:** Registro em tempo real das entradas e saídas de visitantes.
+* **Notificações de Encomendas:** Arquitetura orientada a eventos utilizando **Kafka** para processar de forma assíncrona e notificar os moradores quando as encomendas chegam à portaria.
+* **Interface Moderna:** Componentes responsivos e interativos desenvolvidos com PrimeFaces.
 
-##  Getting Started
+## Como Começar
 
-### Prerequisites
+### Pré-requisitos
 
-*   Java 17 or higher
-*   Maven
-*   Docker & Docker Compose (for running Oracle DB and Kafka locally)
+* Java 17 ou superior
+* Maven
+* Docker e Docker Compose (para executar o Oracle DB e o Kafka localmente)
 
-### Installation & Setup (in Linux)
+### Instalação e Configuração (no Linux)
 
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/MayconVyctor/Java-VisitorPackageManagement.git](https://github.com/MayconVyctor/Java-VisitorPackageManagement.git)
-    cd Java-VisitorPackageManagement
-    ```
+1. **Clone o repositório:**
 
-2.  **Spin up the infrastructure (Oracle DB & Kafka):**
-    ```bash
-    docker-compose up -d
-    ```
+   ```bash
+   git clone [https://github.com/MayconVyctor/Java-VisitorPackageManagement.git](https://github.com/MayconVyctor/Java-VisitorPackageManagement.git)
+   cd Java-VisitorPackageManagement
+   ```
 
-3.  **Build the application:**
-    ```bash
-    mvn clean install
-    ```
+2. **Inicie a infraestrutura (Oracle DB e Kafka):**
 
-4.  **Run the application:**
-    ```bash
-    mvn spring-boot:run
-    ```
+   ```bash
+   docker-compose up -d
+   ```
 
-5.  **Access the application:**
-    Open your browser and navigate to `http://localhost:8080`
+3. **Compile a aplicação:**
 
-##  Contributing
+   ```bash
+   mvn clean install
+   ```
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/MayconVyctor/Java-VisitorPackageManagement/issues).
+4. **Execute a aplicação:**
 
-## License
+   ```bash
+   mvn spring-boot:run
+   ```
 
-This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
+5. **Acesse a aplicação:**
+   Abra seu navegador e acesse `http://localhost:8080`
+
+## Contribuição
+
+Contribuições, relatos de problemas e solicitações de novas funcionalidades são bem-vindos! Fique à vontade para consultar a [página de issues](https://github.com/MayconVyctor/Java-VisitorPackageManagement/issues).
+
+## Licença
+
+Este projeto é licenciado sob a licença [MIT](https://choosealicense.com/licenses/mit/).
