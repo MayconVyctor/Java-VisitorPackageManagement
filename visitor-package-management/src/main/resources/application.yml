@@ -15,3 +15,16 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.OracleDialect
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      # O produtor transforma os dados Java em texto (String) para enviar pela rede
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      # O consumidor precisa de um 'grupo' e transforma o texto de volta para Java
+      group-id: condo-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
