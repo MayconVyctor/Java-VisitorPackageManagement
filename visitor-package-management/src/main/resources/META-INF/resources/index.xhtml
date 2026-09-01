@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Dashboard - CondoManager</title>
+</h:head>
+
+<h:body style="background-color: #f4f4f9; padding: 20px; font-family: Arial, sans-serif;">
+
+    <!-- p:menubar: Cria uma barra de navegação horizontal responsiva -->
+    <h:form>
+        <p:menubar style="margin-bottom: 20px;">
+            <p:menuitem value="Início" icon="pi pi-home" url="/index.xhtml" />
+            <p:menuitem value="Gestão de Moradores" icon="pi pi-users" url="/moradores.xhtml" />
+            <p:menuitem value="Controle de Encomendas" icon="pi pi-box" url="/encomendas.xhtml" />
+        </p:menubar>
+    </h:form>
+
+    <p:panel header="Bem-vindo ao CondoManager">
+        <h2>Sistema de Gestão de Visitantes e Encomendas</h2>
+        <p>Utilize o menu acima para navegar pelas funcionalidades do sistema.</p>
+    </p:panel>
+
+</h:body>
+</html>
