@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Gestão de Encomendas - CondoManager</title>
+</h:head>
+
+<h:body style="background-color: #f4f4f9; padding: 20px; font-family: Arial, sans-serif;">
+
+    <p:growl id="mensagens" showDetail="true" />
+
+    <h:form id="formPrincipal">
+
+        <p:panel header="Registro de Encomendas (Portaria)">
+
+            <p:commandButton value="Nova Encomenda" actionListener="#{encomendaBean.novo}"
+                             update=":formDialog" oncomplete="PF('dialogoEncomenda').show()"
+                             style="margin-bottom: 20px; background-color: #007bff; color: white;" />
+
+            <p:dataTable id="tabela" value="#{encomendaBean.encomendas}" var="enc" emptyMessage="Nenhuma encomenda registrada.">
+
+                <p:column headerText="ID" style="width: 50px;">
+                    <h:outputText value="#{enc.id}" />
+                </p:column>
+
+                <p:column headerText="Descrição">
+                    <h:outputText value="#{enc.descricao}" />
+                </p:column>
+
+                <p:column headerText="Data de Recebimento">
+                    <h:outputText value="#{enc.dataRecebimento}">
+                        <f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Morador / Apto">
+                    <h:outputText value="#{enc.morador.nomeCompleto} (Apto: #{enc.morador.apartamento})" />
+                </p:column>
+
+            </p:dataTable>
+        </p:panel>
+
+    </h:form>
+
+    <p:dialog header="Registrar Chegada de Encomenda" widgetVar="dialogoEncomenda" modal="true" resizable="false">
+
+        <h:form id="formDialog">
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <p:outputLabel for="descricao" value="Descrição da Caixa:" />
+                <p:inputText id="descricao" value="#{encomendaBean.encomenda.descricao}" required="true" requiredMessage="Descrição obrigatória." placeholder="Ex: Pacote Mercado Livre"/>
+
+                <p:outputLabel for="morador" value="Destinatário:" />
+                <p:selectOneMenu id="morador" value="#{encomendaBean.moradorIdSelecionado}" required="true" requiredMessage="Selecione um morador.">
+                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{encomendaBean.moradoresDisponiveis}" var="m"
+                                   itemLabel="#{m.nomeCompleto} - Apto #{m.apartamento}" itemValue="#{m.id}" />
+                </p:selectOneMenu>
+
+            </h:panelGrid>
+
+            <p:commandButton value="Registrar e Notificar" actionListener="#{encomendaBean.salvar}"
+                             update=":formPrincipal:tabela :mensagens"
+                             oncomplete="if(!args.validationFailed) PF('dialogoEncomenda').hide()"
+                             style="margin-top: 10px; background-color: #28a745; color: white;" />
+        </h:form>
+
+    </p:dialog>
+
+</h:body>
+</html>
