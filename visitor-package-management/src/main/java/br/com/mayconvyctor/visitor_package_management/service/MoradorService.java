@@ -4,8 +4,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.mayconvyctor.visitor_package_management.model.Morador;
 import br.com.mayconvyctor.visitor_package_management.repository.MoradorRepository;
 import java.util.List;
-
-import java.util.List;
 import java.util.Optional;
 
 @Service
