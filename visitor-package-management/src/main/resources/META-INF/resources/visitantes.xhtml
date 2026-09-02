@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Controle de Visitantes - CondoManager</title>
+</h:head>
+
+<h:body style="background-color: #f4f4f9; padding: 20px; font-family: Arial, sans-serif;">
+
+    <p:growl id="mensagens" showDetail="true" />
+
+    <h:form id="formPrincipal">
+        <p:panel header="Controle de Acesso (Portaria)">
+
+            <p:commandButton value="Registrar Entrada" actionListener="#{visitanteBean.novo}"
+                             update=":formDialog" oncomplete="PF('dialogoVisitante').show()"
+                             style="margin-bottom: 20px; background-color: #17a2b8; color: white;" />
+
+            <p:dataTable id="tabela" value="#{visitanteBean.visitantes}" var="vis" emptyMessage="Nenhum visitante registrado.">
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{vis.nomeCompleto}" />
+                </p:column>
+
+                <p:column headerText="RG">
+                    <h:outputText value="#{vis.rg}" />
+                </p:column>
+
+                <p:column headerText="Morador / Apto">
+                    <h:outputText value="#{vis.moradorDestino.nomeCompleto} (#{vis.moradorDestino.apartamento})" />
+                </p:column>
+
+                <p:column headerText="Entrada">
+                    <h:outputText value="#{vis.dataEntrada}">
+                        <f:convertDateTime type="localDateTime" pattern="dd/MM HH:mm" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Saída">
+                    <h:outputText value="#{vis.dataSaida != null ? vis.dataSaida : 'Ainda no local'}">
+                        <f:convertDateTime type="localDateTime" pattern="dd/MM HH:mm" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Ação">
+                    <!-- Só exibe o botão de registrar saída se o visitante ainda não tiver saído -->
+                    <p:commandButton value="Dar Saída" actionListener="#{visitanteBean.registrarSaida(vis)}"
+                                     update=":formPrincipal:tabela :mensagens"
+                                     rendered="#{vis.dataSaida == null}"
+                                     style="background-color: #ffc107; color: black; border: none;"/>
+                </p:column>
+
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+
+    <p:dialog header="Liberar Entrada" widgetVar="dialogoVisitante" modal="true" resizable="false">
+        <h:form id="formDialog">
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <p:outputLabel for="nome" value="Nome Completo:" />
+                <p:inputText id="nome" value="#{visitanteBean.visitante.nomeCompleto}" required="true" />
+
+                <p:outputLabel for="rg" value="RG:" />
+                <p:inputText id="rg" value="#{visitanteBean.visitante.rg}" required="true" />
+
+                <p:outputLabel for="morador" value="Visitará:" />
+                <p:selectOneMenu id="morador" value="#{visitanteBean.moradorIdSelecionado}" required="true">
+                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{visitanteBean.moradoresDisponiveis}" var="m"
+                                   itemLabel="#{m.nomeCompleto} - Apto #{m.apartamento}" itemValue="#{m.id}" />
+                </p:selectOneMenu>
+
+            </h:panelGrid>
+
+            <p:commandButton value="Confirmar Entrada" actionListener="#{visitanteBean.salvarEntrada}"
+                             update=":formPrincipal:tabela :mensagens"
+                             oncomplete="if(!args.validationFailed) PF('dialogoVisitante').hide()" />
+        </h:form>
+    </p:dialog>
+
+</h:body>
+</html>
