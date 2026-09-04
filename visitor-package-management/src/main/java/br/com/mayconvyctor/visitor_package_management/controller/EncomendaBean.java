@@ -20,11 +20,10 @@ public class EncomendaBean implements Serializable {
     private final MoradorService moradorService;
 
     private List<Encomenda> encomendas;
-    private List<Morador> moradoresDisponiveis; // Para o dropdown da tela
+    private List<Morador> moradoresDisponiveis;
     private Encomenda encomenda;
-    private Long moradorIdSelecionado; // Guarda o ID do morador escolhido no dropdown
+    private Long moradorIdSelecionado;
 
-    // Injeção de ambas as dependências
     public EncomendaBean(EncomendaService encomendaService, MoradorService moradorService) {
         this.encomendaService = encomendaService;
         this.moradorService = moradorService;
@@ -33,7 +32,7 @@ public class EncomendaBean implements Serializable {
     @PostConstruct
     public void init() {
         encomendas = encomendaService.listarTodas();
-        moradoresDisponiveis = moradorService.listarTodos(); // Preenche as opções do Select
+        moradoresDisponiveis = moradorService.listarTodos();
         encomenda = new Encomenda();
     }
 
@@ -44,7 +43,6 @@ public class EncomendaBean implements Serializable {
 
     public void salvar() {
         try {
-            // Relaciona o morador escolhido na tela com a nova encomenda
             Morador moradorDestino = moradoresDisponiveis.stream()
                     .filter(m -> m.getId().equals(moradorIdSelecionado))
                     .findFirst()
@@ -52,13 +50,12 @@ public class EncomendaBean implements Serializable {
 
             encomenda.setMorador(moradorDestino);
 
-            // O Service vai salvar no Oracle e disparar para o Kafka!
             encomendaService.registrar(encomenda);
 
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Encomenda registrada e notificação enviada!"));
 
-            init(); // Recarrega a tabela
+            init();
 
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
@@ -66,7 +63,6 @@ public class EncomendaBean implements Serializable {
         }
     }
 
-    // Getters e Setters
     public List<Encomenda> getEncomendas() { return encomendas; }
     public List<Morador> getMoradoresDisponiveis() { return moradoresDisponiveis; }
     public Encomenda getEncomenda() { return encomenda; }
