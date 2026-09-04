@@ -32,10 +32,6 @@ public class VisitanteService {
         return visitanteRepository.save(visitante);
     }
 
-    /**
-     * Regra de Negócio: Busca o visitante pelo ID e preenche a data de saída
-     * com o horário atual do servidor.
-     */
     @Transactional
     public void registrarSaida(Long visitanteId) {
         Visitante visitante = visitanteRepository.findById(visitanteId)
