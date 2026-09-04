@@ -8,10 +8,5 @@ import java.util.List;
 
 @Repository
 public interface VisitanteRepository extends JpaRepository<Visitante, Long> {
-
-    /**
-     * Query Method: O Spring gera um SELECT buscando todos os visitantes
-     * onde a coluna 'data_saida' está nula (ou seja, ainda estão no prédio).
-     */
     List<Visitante> findByDataSaidaIsNull();
 }
