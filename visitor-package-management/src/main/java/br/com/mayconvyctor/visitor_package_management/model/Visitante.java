@@ -15,17 +15,13 @@ public class Visitante {
     private String nomeCompleto;
 
     @Column(nullable = false, length = 20)
-    private String rg; // RG é mais comum para controle de portaria que CPF
+    private String rg;
 
     @Column(nullable = false)
     private LocalDateTime dataEntrada;
 
-    // A hora de saída começa nula, e o porteiro preenche quando a pessoa vai embora
     private LocalDateTime dataSaida;
 
-    /**
-     * Relacionamento: Todo visitante vai para o apartamento de um Morador específico.
-     */
     @ManyToOne
     @JoinColumn(name = "morador_id", nullable = false)
     private Morador moradorDestino;
