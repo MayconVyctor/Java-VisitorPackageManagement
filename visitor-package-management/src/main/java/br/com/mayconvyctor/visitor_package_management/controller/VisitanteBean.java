@@ -31,7 +31,6 @@ public class VisitanteBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        // Por padrão, carrega todos os visitantes para o histórico da portaria
         visitantes = visitanteService.listarTodos();
         moradoresDisponiveis = moradorService.listarTodos();
         visitante = new Visitante();
