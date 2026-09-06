@@ -15,13 +15,11 @@
 
     <h:form id="formPrincipal">
         <p:panel header="Controle de Acesso (Portaria)">
-
             <p:commandButton value="Registrar Entrada" actionListener="#{visitanteBean.novo}"
                              update=":formDialog" oncomplete="PF('dialogoVisitante').show()"
                              style="margin-bottom: 20px; background-color: #17a2b8; color: white;" />
 
             <p:dataTable id="tabela" value="#{visitanteBean.visitantes}" var="vis" emptyMessage="Nenhum visitante registrado.">
-
                 <p:column headerText="Nome">
                     <h:outputText value="#{vis.nomeCompleto}" />
                 </p:column>
@@ -47,7 +45,6 @@
                 </p:column>
 
                 <p:column headerText="Ação">
-                    <!-- Só exibe o botão de registrar saída se o visitante ainda não tiver saído -->
                     <p:commandButton value="Dar Saída" actionListener="#{visitanteBean.registrarSaida(vis)}"
                                      update=":formPrincipal:tabela :mensagens"
                                      rendered="#{vis.dataSaida == null}"
@@ -57,7 +54,6 @@
             </p:dataTable>
         </p:panel>
     </h:form>
-
     <p:dialog header="Liberar Entrada" widgetVar="dialogoVisitante" modal="true" resizable="false">
         <h:form id="formDialog">
             <h:panelGrid columns="2" cellpadding="5">
@@ -74,14 +70,11 @@
                     <f:selectItems value="#{visitanteBean.moradoresDisponiveis}" var="m"
                                    itemLabel="#{m.nomeCompleto} - Apto #{m.apartamento}" itemValue="#{m.id}" />
                 </p:selectOneMenu>
-
             </h:panelGrid>
-
             <p:commandButton value="Confirmar Entrada" actionListener="#{visitanteBean.salvarEntrada}"
                              update=":formPrincipal:tabela :mensagens"
                              oncomplete="if(!args.validationFailed) PF('dialogoVisitante').hide()" />
         </h:form>
     </p:dialog>
-
 </h:body>
 </html>
