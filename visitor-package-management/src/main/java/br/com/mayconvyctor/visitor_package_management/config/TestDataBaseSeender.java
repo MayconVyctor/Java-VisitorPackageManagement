@@ -1,16 +1,16 @@
 package br.com.mayconvyctor.visitor_package_management.config;
 
-import br.com.mayconvyctor.condomanager.model.Morador;
-import br.com.mayconvyctor.condomanager.repository.MoradorRepository;
+import br.com.mayconvyctor.visitor_package_management.model.Morador;
+import br.com.mayconvyctor.visitor_package_management.repository.MoradorRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 @Configuration
-public class TestDatabaseSeeder implements CommandLineRunner {
+public class TestDataBaseSeender implements CommandLineRunner {
 
     private final MoradorRepository moradorRepository;
-    public TestDatabaseSeeder(MoradorRepository moradorRepository) {
+    public TestDataBaseSeender(MoradorRepository moradorRepository) {
         this.moradorRepository = moradorRepository;
     }
 

@@ -6,8 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EncomendaRepository extends JpaRepository<Encomenda, Long> {
-
-    // Query Method customizado: O Spring gera um SELECT para buscar
-    // todas as encomendas baseadas no ID de um morador específico.
     Iterable<Encomenda> findByMoradorId(Long moradorId);
 }
