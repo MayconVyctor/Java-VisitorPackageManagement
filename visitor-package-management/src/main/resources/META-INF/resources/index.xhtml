@@ -5,19 +5,42 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Dashboard - Visitor Package Manager</title>
+    <title>Dashboard - CondoManager</title>
 </h:head>
+
 <h:body style="background-color: #f4f4f9; padding: 20px; font-family: Arial, sans-serif;">
+
     <h:form>
         <p:menubar style="margin-bottom: 20px;">
             <p:menuitem value="Início" icon="pi pi-home" url="/index.xhtml" />
-            <p:menuitem value="Gestão de Moradores" icon="pi pi-users" url="/moradores.xhtml" />
-            <p:menuitem value="Controle de Encomendas" icon="pi pi-box" url="/encomendas.xhtml" />
+            <p:menuitem value="Moradores" icon="pi pi-users" url="/moradores.xhtml" />
+            <p:menuitem value="Encomendas" icon="pi pi-box" url="/encomendas.xhtml" />
+            <!-- Link para a tela de visitantes adicionado aqui -->
+            <p:menuitem value="Visitantes" icon="pi pi-id-card" url="/visitantes.xhtml" />
         </p:menubar>
     </h:form>
-    <p:panel header="Bem-vindo ao Visitor Package Manager">
-        <h2>Sistema de Gestão de Visitantes e Encomendas</h2>
-        <p>Utilize o menu acima para navegar pelas funcionalidades do sistema.</p>
-    </p:panel>
+
+    <h2>Visão Geral do Condomínio</h2>
+
+    <!-- h:panelGrid organiza os cartões lado a lado -->
+    <h:panelGrid columns="3" style="width: 100%; text-align: center; margin-top: 20px;" cellpadding="10">
+
+        <p:card style="background-color: #007bff; color: white;">
+            <f:facet name="title">Moradores Registrados</f:facet>
+            <h1 style="margin: 0; font-size: 3rem;">#{dashboardBean.totalMoradores}</h1>
+        </p:card>
+
+        <p:card style="background-color: #28a745; color: white;">
+            <f:facet name="title">Pacotes Processados</f:facet>
+            <h1 style="margin: 0; font-size: 3rem;">#{dashboardBean.totalEncomendas}</h1>
+        </p:card>
+
+        <p:card style="background-color: #dc3545; color: white;">
+            <f:facet name="title">Visitantes no Local</f:facet>
+            <h1 style="margin: 0; font-size: 3rem;">#{dashboardBean.visitantesNoLocal}</h1>
+        </p:card>
+
+    </h:panelGrid>
+
 </h:body>
 </html>
