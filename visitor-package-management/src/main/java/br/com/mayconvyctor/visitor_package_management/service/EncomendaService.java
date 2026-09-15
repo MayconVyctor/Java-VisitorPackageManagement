@@ -6,6 +6,7 @@ import br.com.mayconvyctor.visitor_package_management.repository.EncomendaReposi
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -36,5 +37,16 @@ public class EncomendaService {
         notificacaoProducer.enviarNotificacao(mensagem);
 
         return encomendaSalva;
+    }
+
+    @Transactional
+    public void registrarRetirada(Long encomendaId) {
+        Encomenda encomenda = encomendaRepository.findById(encomendaId)
+                .orElseThrow(() -> new IllegalArgumentException("Encomenda não encontrada"));
+        if (encomenda.getDataRetirada() != null) {
+            throw new IllegalStateException("Esta encomenda já foi retirada pelo morador");
+        }
+        encomenda.setDataRetirada(LocalDateTime.now());
+        encomendaRepository.save(encomenda);
     }
 }
