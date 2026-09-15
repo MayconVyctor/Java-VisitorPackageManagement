@@ -62,6 +62,17 @@ public class EncomendaBean implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
         }
     }
+    public void registrarRetirada(Encomenda encomendaSelecionada) {
+        try {
+            encomendaService.registrarRetirada(encomendaSelecionada.getId());
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Encomenda entregue ao morador!"));
+            init();
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+        }
+    }
 
     public List<Encomenda> getEncomendas() { return encomendas; }
     public List<Morador> getMoradoresDisponiveis() { return moradoresDisponiveis; }
