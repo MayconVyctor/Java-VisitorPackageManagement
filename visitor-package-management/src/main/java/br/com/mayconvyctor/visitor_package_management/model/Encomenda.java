@@ -17,6 +17,8 @@ public class Encomenda {
     @Column(nullable = false)
     private LocalDateTime dataRecebimento;
 
+    private LocalDateTime dataRetirada;
+
     @ManyToOne
     @JoinColumn(name = "morador_id", nullable = false)
     private Morador morador;
@@ -51,4 +53,7 @@ public class Encomenda {
     public void setMorador(Morador morador) {
         this.morador = morador;
     }
+
+    public LocalDateTime getDataRetirada() { return dataRetirada; }
+    public void setDataRetirada(LocalDateTime dataRetirada) { this.dataRetirada = dataRetirada; }
 }
