@@ -28,15 +28,30 @@
                     <h:outputText value="#{enc.descricao}" />
                 </p:column>
 
-                <p:column headerText="Data de Recebimento">
+                <p:column headerText="Morador / Apto">
+                    <h:outputText value="#{enc.morador.nomeCompleto} (Apto: #{enc.morador.apartamento})" />
+                </p:column>
+
+                <p:column headerText="Recebido em">
                     <h:outputText value="#{enc.dataRecebimento}">
                         <f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm" />
                     </h:outputText>
                 </p:column>
 
-                <p:column headerText="Morador / Apto">
-                    <h:outputText value="#{enc.morador.nomeCompleto} (Apto: #{enc.morador.apartamento})" />
+                <p:column headerText="Status / Retirada">
+                    <h:outputText value="#{enc.dataRetirada != null ? enc.dataRetirada : 'Pendente'}" style="#{enc.dataRetirada == null ? 'font-weight: bold; color: #dc3545;' : ''}">
+                        <f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm" rendered="#{enc.dataRetirada != null}" />
+                    </h:outputText>
                 </p:column>
+
+                <p:column headerText="Ação">
+                    <!-- O botão só é desenhado na tela se o pacote estiver pendente -->
+                    <p:commandButton value="Entregar" actionListener="#{encomendaBean.registrarRetirada(enc)}"
+                                     update=":formPrincipal:tabela :mensagens"
+                                     rendered="#{enc.dataRetirada == null}"
+                                     style="background-color: #28a745; color: white; border: none;"/>
+                </p:column>
+
             </p:dataTable>
         </p:panel>
     </h:form>
