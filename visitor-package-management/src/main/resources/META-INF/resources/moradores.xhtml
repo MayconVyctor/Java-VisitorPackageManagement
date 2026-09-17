@@ -17,13 +17,15 @@
             <p:commandButton value="Novo Morador" actionListener="#{moradorBean.novo}"
                              update=":formDialog" oncomplete="PF('dialogoMorador').show()"
                              style="margin-bottom: 20px; background-color: #28a745; color: white;" />
-            <p:dataTable id="tabela" value="#{moradorBean.moradores}" var="morador" emptyMessage="Nenhum morador encontrado">
+            <p:dataTable id="tabela" value="#{moradorBean.moradores}" var="morador"
+                         emptyMessage="Nenhum morador encontrado."
+                         paginator="true" rows="5" paginatorPosition="bottom">
 
-                <p:column headerText="ID">
+                <p:column headerText="ID" style="width: 50px;">
                     <h:outputText value="#{morador.id}" />
                 </p:column>
 
-                <p:column headerText="Nome Completo">
+                <p:column headerText="Nome Completo" filterBy="#{morador.nomeCompleto}" filterMatchMode="contains">
                     <h:outputText value="#{morador.nomeCompleto}" />
                 </p:column>
 
@@ -31,7 +33,7 @@
                     <h:outputText value="#{morador.cpf}" />
                 </p:column>
 
-                <p:column headerText="Apartamento">
+                <p:column headerText="Apartamento" filterBy="#{morador.apartamento}" filterMatchMode="exact">
                     <h:outputText value="#{morador.apartamento}" />
                 </p:column>
 
@@ -40,7 +42,6 @@
                                      update=":formPrincipal:tabela :mensagens"
                                      style="background-color: #dc3545; color: white; border: none;"/>
                 </p:column>
-
             </p:dataTable>
         </p:panel>
     </h:form>
